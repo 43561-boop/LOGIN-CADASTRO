@@ -17,3 +17,13 @@ class FormularioController:
         if formulario:
             return{"mensagem": "Formulario criado com sucesso"}, 201
         return{"error": "Erro ao criar formulario"}, 500
+
+    @staticmethod
+    def get_formulario(user_id):
+
+        formulario = FormularioModel.find_by_user_id(user_id)
+        if formulario:
+            return {"id": formulario['id'], "nome": formulario['nome'], "email": formulario['email'],
+            "data_nascimento": formulario['data_nascimento'], "cpf": formulario['cpf'],
+            "genero": formulario['genero']}, 200
+            return {"error": "Formulario não encontrado"}, 400

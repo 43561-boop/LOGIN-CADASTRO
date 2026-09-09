@@ -1,4 +1,4 @@
-from werkzeug.security import generate_password_hash, cheack_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import create_access_token
 from models.user_model import UserModel
 
@@ -27,7 +27,7 @@ class UserControllers:
             return {"error": "Nome de usuário e senha são obrigatórios"}, 400
         
         user = UserModel.find_by_username(username)
-        if user and cheack_password_hash(user['password'], password):
+        if user and check_password_hash(user['password'], password):
             access_token = create_access_token(identity=str(user['id']))
             return{"access_token": access_token}, 200
 
