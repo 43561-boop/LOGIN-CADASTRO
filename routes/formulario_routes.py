@@ -9,3 +9,9 @@ formulario_bp = Blueprint('formulario',__name__)
 def create_formulario():
     user_id = get_jwt_identity()
     return jsonify(FormularioController.create_formulario(user_id, request.get_json()))
+
+@formulario_bp.route('/', methods=['GET'])
+@jwt_required()
+def get_formulario():
+    user_id = get_jwt_identity()
+    return jsonify(FormularioController.get_formulario(user_id))

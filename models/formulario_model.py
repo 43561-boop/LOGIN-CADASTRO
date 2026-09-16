@@ -16,3 +16,13 @@ class FormularioModel:
             return None
         finally:
             conn.close
+
+    @staticmethod
+    def find_by_user_id(user_id):
+        conn = get_db_connection()
+        formulario = conn.execute('SELECT * FROM formularios WHERE user_id = ?', (user_id,)).fetchone()
+
+    @staticmethod
+    def find_by_id(formulario_id):
+        conn = get_db_connection()
+        formlario = conn.execute('SELECT * FROM formularios WHERE id = ? ', (formulario_id,)). fetchone()
