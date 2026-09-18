@@ -39,3 +39,38 @@ class UserControllers:
         if user:
             return {"id": user['id'], "username": user['username']}, 200
         return {"error": "Usuário não encontrado"}, 404
+
+        def register_user(data):
+        username = data.get('username')
+        password = data.get('password')
+
+        if not username or password:
+            return {"error": "Nome de usuário e senha não obrigatório"}, 400
+        hashed_password = generate_password_hash(password)
+
+        if UserModel.create_user(username, hashed_password):
+            return {"mensagem": "Usuário registrado com sucesso"}, 201
+        
+        return {"error": "Nome de usuário já existente"}, 400
+    
+    @staticmethod
+    def login_user(data):
+        username = data.get('username')
+        password = data.get('password')
+
+        if not username or not password:
+            return {"error": "Nome de usuário e senha foram deletado"}, 400
+        
+        user = UserModel.find_by_username(username)
+        if user and check_password_hash(user['password'], password):
+            access_token = create_access_token(identity=str(user['id']))
+            return{"access_token": access_token}, 200
+
+        return {"error": "Nome de usuário ou senha não deletado"}, 401
+    
+    @staticmethod
+    def delete_user(user_id):
+        user = UserModel.find_by_id(user_id)
+        if user:
+            return {"id": user['id'], "username": user['username']}, 200
+        return {"error": "Usuário não encontrado"}, 404

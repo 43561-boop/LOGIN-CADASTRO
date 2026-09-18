@@ -15,3 +15,9 @@ def create_formulario():
 def get_formulario():
     user_id = get_jwt_identity()
     return jsonify(FormularioController.get_formulario(user_id))
+
+@formulario_bp.route('/', methods=['PUT'])
+@jwt_required()
+def put_formulario():
+    user_id = get_jwt_identity()
+    return jsonify(FormularioController.put_formulario(user_id))
