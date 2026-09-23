@@ -18,6 +18,12 @@ def get_formulario():
 
 @formulario_bp.route('/', methods=['PUT'])
 @jwt_required()
-def put_formulario():
+def update_formulario():
     user_id = get_jwt_identity()
-    return jsonify(FormularioController.put_formulario(user_id))
+    return jsonify(FormularioController.update_formulario(user_id))
+
+@formulario_bp.route('/', methods=['DELETE'])
+@jwt_required()
+def delete_formulario():
+    user_id = get_jwt_identity()
+    return jsonify(FormularioController.delete_formulario(user_id))

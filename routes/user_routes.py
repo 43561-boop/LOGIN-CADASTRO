@@ -16,16 +16,16 @@ def login():
 @jwt_required()  
 def get_user():
     user_id = get_jwt_identity()
-    return jsonify(UserController.get_user(user_id))
+    return jsonify(UserControllers.get_user(user_id))
 
 @user_bp.route('/me', methods=['PUT'])
 @jwt_required()  
-def put_user():
+def update_user():
     user_id = get_jwt_identity()
-    return jsonify(UserController.get_user(user_id))
+    return jsonify(UserControllers.update_user(user_id))
 
 @user_bp.route('/me', methods=['DELETE'])
 @jwt_required()  
 def delete_user():
     user_id = get_jwt_identity()
-    return jsonify(UserController.get_user(user_id))
+    return jsonify(UserControllers.delete_user(user_id))

@@ -34,3 +34,16 @@ class UserModel:
             return None
         finally:
             conn.close()
+
+
+    @staticmethod
+    def update_user(username, password):
+        conn = get_db_connection()
+        try:
+            conn.execute('APDATE INTO (username, password) VALUES (?,?)',(username,password))
+            conn.commit()
+            return True
+        except sqlite3.IntegrityError:
+            return None
+        finally:
+            conn.close()

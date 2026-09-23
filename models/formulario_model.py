@@ -26,3 +26,26 @@ class FormularioModel:
     def find_by_id(formulario_id):
         conn = get_db_connection()
         formlario = conn.execute('SELECT * FROM formularios WHERE id = ? ', (formulario_id,)). fetchone()
+
+
+    @staticmethod
+    def delete_id(user_id):
+        conn = get_db_connection()
+        formulario = conn.execute('DELETE * FROM formularios WHERE user_id = ?', (user_id,)).fetchone()
+
+    @staticmethod
+    def delete_id(formulario_id):
+        conn = get_db_connection()
+        formlario = conn.execute('DELETE * FROM formularios WHERE id = ? ', (formulario_id,)). fetchone()
+
+
+
+    @staticmethod
+    def update_id(user_id):
+        conn = get_db_connection()
+        formulario = conn.execute('UPDATE * FROM formularios WHERE user_id = ?', (user_id,)).fetchone()
+
+    @staticmethod
+    def update_id(formulario_id):
+        conn = get_db_connection()
+        formlario = conn.execute('UPDATE * FROM formularios WHERE id = ? ', (formulario_id,)). fetchone()
